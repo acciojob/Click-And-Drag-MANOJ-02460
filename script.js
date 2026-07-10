@@ -1,13 +1,14 @@
 
 const slider = document.querySelector(".items");
 let isDown = false;
-let startX;
-let scrollLeft;
+let startX = 0;
+let scrollLeft = 0;
 
 slider.addEventListener("mousedown",(e)=>{
+	if(e.which !== 1) return;
 	isDown=true;
 	slider.classList.add("active");
-	startX = e.pageX-slider.offsetLeft;
+	startX = e.pageX;
 	scrollLeft = slider.scrollLeft;
 });
 
@@ -15,10 +16,8 @@ slider.addEventListener("mousemove",(e)=>{
 	if(!isDown) return;
 
 	e.preventDefault();
-	const x = e.pageX-slider.offsetLeft;
-	const walk = x-startX
-
-	slider.scrollLeft = scrollLeft-walk
+	const walk = e.pageX - startX;
+    slider.scrollLeft = scrollLeft - walk;
 });
 
 slider.addEventListener("mouseup",()=>{
