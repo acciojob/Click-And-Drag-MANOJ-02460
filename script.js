@@ -5,19 +5,14 @@ let activeCube = null;
 let offsetX = 0;
 let offsetY = 0;
 
-// Convert cubes to absolute positioning
-window.addEventListener("load", () => {
+// Arrange cubes in a 3 × 3 grid
+cubes.forEach((cube, index) => {
 
-    cubes.forEach(cube => {
+    const row = Math.floor(index / 3);
+    const col = index % 3;
 
-        const rect = cube.getBoundingClientRect();
-        const containerRect = container.getBoundingClientRect();
-
-        cube.style.position = "absolute";
-        cube.style.left = `${rect.left - containerRect.left}px`;
-        cube.style.top = `${rect.top - containerRect.top}px`;
-
-    });
+    cube.style.left = `${30 + col * 180}px`;
+    cube.style.top = `${30 + row * 180}px`;
 
 });
 
@@ -47,7 +42,7 @@ document.addEventListener("mousemove", (e) => {
     let left = e.clientX - containerRect.left - offsetX;
     let top = e.clientY - containerRect.top - offsetY;
 
-    // Boundary conditions
+    // Keep cube inside container
     left = Math.max(
         0,
         Math.min(left, container.clientWidth - activeCube.offsetWidth)
