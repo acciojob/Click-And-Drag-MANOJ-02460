@@ -5,30 +5,30 @@
 }
 
 body{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
+    margin:20px;
 }
 
 .items{
     width:800px;
     overflow-x:scroll;
     overflow-y:hidden;
-    white-space:nowrap;
     cursor:grab;
     border:2px solid black;
     user-select:none;
+	overflow:auto;
+    display:flex;
 }
 
 .item{
-    width:200px;
+    flex: 0 0 300px;
     height:200px;
-    display:inline-flex;
+    display:flex;
     justify-content:center;
     align-items:center;
     margin:10px;
     background:dodgerblue;
     color:white;
     font-size:40px;
+	flex-shrink: 0;
+	cursor:grab;
 }

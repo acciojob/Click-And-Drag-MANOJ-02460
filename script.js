@@ -1,30 +1,24 @@
 const slider = document.querySelector(".items");
 
 let isDown = false;
-let startX;
-let scrollLeft;
+let startX = 0;
+let scrollLeft = 0;
 
 slider.addEventListener("mousedown", (e) => {
     isDown = true;
-    startX = e.pageX;
+    startX = e.clientX;
     scrollLeft = slider.scrollLeft;
 });
 
-slider.addEventListener("mouseleave", () => {
-    isDown = false;
-});
-
-slider.addEventListener("mouseup", () => {
-    isDown = false;
-});
-
-slider.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove", (e) => {
     if (!isDown) return;
 
     e.preventDefault();
 
-    const x = e.pageX;
-    const walk = x - startX;
-
+    const walk = e.clientX - startX;
     slider.scrollLeft = scrollLeft - walk;
+});
+
+document.addEventListener("mouseup", () => {
+    isDown = false;
 });
